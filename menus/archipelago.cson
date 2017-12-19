@@ -1,0 +1,14 @@
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'Archipelago'
+      'submenu': [
+        {
+          'label': 'Open Terminal'
+          'command': 'archipelago:open'
+        }
+      ]
+    ]
+  }
+]

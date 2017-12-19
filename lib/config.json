@@ -1,0 +1,157 @@
+{
+  "lineHeight": {
+    "type": "number",
+    "default": 1,
+    "minimum": 0
+  },
+  "letterSpacing": {
+    "type": "number",
+    "default": 0,
+    "minimum": 0
+  },
+  "scrollback": {
+    "type": "integer",
+    "default": 1000,
+    "minimum": 0
+  },
+  "tabStopWidth": {
+    "type": "integer",
+    "default": 8,
+    "minimum": 0
+  },
+  "enableBold": {
+    "type": "boolean",
+    "default": true
+  },
+  "fontFamily": {
+    "type": "string",
+    "default": "courier-new, courier, monospace"
+  },
+  "fontSize": {
+    "type": "integer",
+    "default": 15,
+    "minimum": 1
+  },
+  "cursorBlink": {
+    "type": "boolean",
+    "default": false
+  },
+  "cursorStyle": {
+    "type": "string",
+    "default": "block",
+    "enum": [
+      "block",
+      "underline",
+      "bar"
+    ]
+  },
+  "bell": {
+    "type": "object",
+    "properties": {
+      "sound": {
+        "description": "Can be a music(ogg, mp3, etc.) link or uri",
+        "type": "string",
+        "default": "https://raw.githubusercontent.com/chromium/hterm/master/audio/bell.ogg"
+      },
+      "style": {
+        "type": "string",
+        "default": "none",
+        "enum": [
+          "none",
+          "visual",
+          "sound",
+          "both"
+        ]
+      }
+    }
+  },
+  "theme": {
+    "type": "object",
+    "properties": {
+      "foreground": {
+        "type": "color",
+        "default": "#ffffff"
+      },
+      "background": {
+        "type": "color",
+        "default": "#000000"
+      },
+      "selection": {
+        "type": "color",
+        "default": "rgba(255, 255, 255, 0.3)"
+      },
+      "cursor": {
+        "type": "color",
+        "default": "#ffffff"
+      },
+      "cursorAccent": {
+        "type": "color",
+        "default": "#000000"
+      },
+      "red": {
+        "type": "color",
+        "default": "#cc0000"
+      },
+      "brightRed": {
+        "type": "color",
+        "default": "#ef2929"
+      },
+      "green": {
+        "type": "color",
+        "default": "#4e9a06"
+      },
+      "brightGreen": {
+        "type": "color",
+        "default": "#8ae234"
+      },
+      "yellow": {
+        "type": "color",
+        "default": "#c4a000"
+      },
+      "brightYellow": {
+        "type": "color",
+        "default": "#fce94f"
+      },
+      "magenta": {
+        "type": "color",
+        "default": "#75507b"
+      },
+      "brightMagenta": {
+        "type": "color",
+        "default": "#ad7fa8"
+      },
+      "cyan": {
+        "type": "color",
+        "default": "#06989a"
+      },
+      "brightCyan": {
+        "type": "color",
+        "default": "#34e2e2"
+      },
+      "blue": {
+        "type": "color",
+        "default": "#3465a4"
+      },
+      "brightBlue": {
+        "type": "color",
+        "default": "#729fcf"
+      },
+      "white": {
+        "type": "color",
+        "default": "#d3d7cf"
+      },
+      "brightWhite": {
+        "type": "color",
+        "default": "#eeeeec"
+      },
+      "black": {
+        "type": "color",
+        "default": "#2e3436"
+      },
+      "brightBlack": {
+        "type": "color",
+        "default": "#555753"
+      }
+    }
+  }
+}
