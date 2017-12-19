@@ -1,9 +1,9 @@
 Pty                  = require('node-pty')
 defaultShell         = require('default-shell')
-ConfigFile           = require('../utils/config_file')
 { EventEmitter }     = require('events')
 React                = require('react')
 ArchipelagoTerminal  = require('./archipelago_terminal')
+Terminal             = require('./xterm/xterm')
 
 module.exports =
 class Session
@@ -11,7 +11,6 @@ class Session
     @id = Math.random()
     @group = group
     @emitter = new EventEmitter()
-    @configFile = new ConfigFile()
     @pty = Pty.spawn(
       @settings('shell') || defaultShell,
       @settings('shellArgs').split(','),
@@ -27,7 +26,7 @@ class Session
       bellSound: @settings('bellSound'),
       scrollback: @settings('scrollback'),
       tabStopWidth: parseInt(@settings('tabStopWidth')),
-      theme: @settings('theme')
+      theme: @theme()
     })
     @bindDataListeners()
 
@@ -71,6 +70,13 @@ class Session
     else
       atom.config.get("archipelago")
 
+  theme: ->
+    theme = {}
+    Object.entries(@settings('theme')).map (themeMapping) =>
+      theme[themeMapping[0]] = themeMapping[1].toHexString()
+
+    theme
+
   updateSettings: ->
     [
       'fontFamily',
@@ -79,8 +85,7 @@ class Session
       'cursorBlink',
       'bellSound',
       'bellStyle',
-      'scrollback',
-      'theme'
+      'scrollback'
     ].forEach (field) =>
       if @xterm[field] != @settings(field)
         @xterm.setOption(field, @settings(field))
@@ -93,11 +98,13 @@ class Session
       if @xterm[field] != parseFloat(@settings(field))
         @xterm.setOption(field, parseFloat(@settings(field)))
 
+    @xterm.setOption("theme", @theme())
+
     @fit()
 
   bindDataListeners: ->
-    @configFile.on 'change', () =>
-      @updateSettings()
+    # @configFile.on 'change', () =>
+      # @updateSettings()
 
     @xterm.on 'data', (data) =>
       @pty.write(data)
@@ -106,8 +113,8 @@ class Session
       @fit()
       @emitter.emit('focused')
 
-    @xterm.on 'title', (title) =>
-      @emitter.emit('titleChanged')
+    # @xterm.on 'title', (title) =>
+    #   @emitter.emit('titleChanged')
 
     @pty.on 'data', (data) =>
       @xterm.write(data)

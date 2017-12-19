@@ -5,7 +5,7 @@
   "description": "A short description of your package",
   "keywords": [],
   "activationCommands": {
-    "atom-workspace": "archipelago:toggle"
+    "atom-workspace": "archipelago:open"
   },
   "repository": "git://github.com/npezza93/archipelago#atom",
   "license": "MIT",

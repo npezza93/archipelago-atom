@@ -45,6 +45,10 @@
       "bar"
     ]
   },
+  "shellArgs": {
+    "type": "string",
+    "default": "--login"
+  },
   "bell": {
     "type": "object",
     "properties": {

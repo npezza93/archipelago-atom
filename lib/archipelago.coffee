@@ -2,8 +2,7 @@ ArchipelagoView         = require('./archipelago-view')
 config                  = require('./config.json')
 { CompositeDisposable } = require('atom')
 
-module.exports =
-class Archipelago
+module.exports = Archipelago =
   archipelagoView: null
   subscriptions: null
   config: config
@@ -14,9 +13,8 @@ class Archipelago
     # Events subscribed to in atom's system can be easily cleaned up with a CompositeDisposable
     @subscriptions = new CompositeDisposable();
 
-    # Register command that toggles this view
     @subscriptions.add atom.commands.add 'atom-workspace', {
-      'archipelago:toggle': => @open()
+      'archipelago:open': => @open()
     }
 
   deactivate: ->
