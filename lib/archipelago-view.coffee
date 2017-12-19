@@ -1,11 +1,9 @@
-ArchipelagoTerminal = require './archipelago-terminal'
+ArchipelagoTerminal = require('./archipelago-terminal')
 
 module.exports =
 class ArchipelagoView
   constructor: (serializedState) ->
     component = new ArchipelagoTerminal({view: this})
-    window.comp = component
-    # window.xxx = component
     @element = component.element
     @_title = 'Archipelago'
 

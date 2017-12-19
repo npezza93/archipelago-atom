@@ -1,10 +1,9 @@
-'use babel';
+ArchipelagoView         = require('./archipelago-view')
+config                  = require('./config.json')
+{ CompositeDisposable } = require('atom')
 
-ArchipelagoView = require './archipelago-view'
-config = require './config.json'
-{CompositeDisposable} = require 'atom'
-
-module.exports = Archipelago =
+module.exports =
+class Archipelago
   archipelagoView: null
   subscriptions: null
   config: config
