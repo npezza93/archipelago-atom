@@ -14,6 +14,8 @@ class Sessions
     else
       @_newGroup(@_find(@root, sessionId), orientation)
 
+    this
+
   remove: (sessionId) ->
     if @root.isSession() && @root.id == sessionId
       @root = null
@@ -33,6 +35,8 @@ class Sessions
         sessionToSave.group.group.left = sessionToSave
       else if sessionToSave.group.group.right == sessionToSave.group
         sessionToSave.group.group.right = sessionToSave
+
+    this
 
   render: (props) ->
     @root.render(props)
