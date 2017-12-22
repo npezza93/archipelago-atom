@@ -3,175 +3,158 @@
 // See https://github.com/atom/atom-dark-ui/blob/master/styles/ui-variables.less
 // for a full listing of what's available.
 @import "ui-variables";
-archipelago {
-@media (min-resolution: 2dppx) {
-  * {
-      text-rendering: geometricPrecision;
-  }
-}
 
-/* scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-thumb {
-  background: #666;
-}
-::-webkit-scrollbar, ::-webkit-scrollbar-thumb {
-  border-radius: 5px;
-}
-.xterm .xterm-viewport {
-  -webkit-transition: all .5s;
-  opacity: 0;
-}
-.xterm .xterm-viewport:hover, .xterm.scrolling .xterm-viewport {
-  opacity: 1;
- -webkit-transition: all .5s;
-}
+.archipelago {
+  archipelago-pane {
+    background: #282c35;
+    margin: 0px;
+    overflow-y: hidden;
+    display: block;
+    height: ~"calc(100% - 10px)";
+    position: relative;
 
-archipelago-terminal {
-  display: flex;
-  margin: 0px 0px 10px 15px;
-  width: calc(100% - 15px);
-  height: calc(100% - 10px);
-}
-.terminal {
-  width: 100%;
-}
-.xterm {
-  background-color: transparent;
-}
-.terminal .xterm-viewport {
-  background-color: transparent;
-}
-
-/* Panes */
-archipelago-pane-list archipelago-pane {
-  margin: 0px;
-  overflow-y: hidden;
-  display: block;
-  height: calc(100% - 10px);
-  position: relative;
-}
-
-/* Splitting */
-.Resizer.horizontal, .Resizer.vertical {
-  background-color: var(--background-color);
-  filter: invert(50%);
-  box-sizing: border-box;
-  z-index: 1;
-  background-clip: padding-box;
-  flex-shrink: 0;
-}
-.Resizer.horizontal {
-  height: 11px;
-  border-top: 5px solid rgba(255, 255, 255, 0);
-  border-bottom: 5px solid rgba(255, 255, 255, 0);
-  cursor: row-resize;
-  width: 100%;
-  /* margin-top: 5px;
-  margin-bottom: 5px; */
-}
-.Pane.Pane2.horizontal {
-  display: flex;
-}
-.Resizer.vertical {
-  width: 11px;
-  margin: 0 -5px;
-  /* margin-right: 10px; */
-  border-left: 5px solid rgba(255, 255, 255, 0);
-  border-right: 5px solid rgba(255, 255, 255, 0);
-  cursor: col-resize;
-}
-}
-archipelago-terminal {
-  height: 100%;
-  .xterm {
-      font-family: courier-new, courier, monospace;
-      font-feature-settings: "liga" 0;
-      position: relative;
-      user-select: none;
-      -ms-user-select: none;
-      -webkit-user-select: none;
-      height: 100%;
-  }
-
-  .xterm.focus,
-  .xterm:focus {
-      outline: none;
-  }
-
-  .xterm .xterm-helpers {
-      position: absolute;
-      top: 0;
-      /**
-       * The z-index of the helpers must be higher than the canvases in order for
-       * IMEs to appear on top.
-       */
-      z-index: 10;
-  }
-
-  .xterm .xterm-helper-textarea {
-      /*
-       * HACK: to fix IE's blinking cursor
-       * Move textarea out of the screen to the far left, so that the cursor is not visible.
-       */
-      position: absolute;
-      opacity: 0;
-      left: -9999em;
-      top: 0;
-      width: 0;
-      height: 0;
-      z-index: -10;
-      /** Prevent wrapping so the IME appears against the textarea at the correct position */
-      white-space: nowrap;
-      overflow: hidden;
-      resize: none;
-  }
-
-  .xterm .composition-view {
-      /* TODO: Composition position got messed up somewhere */
-      background: #000;
-      color: #FFF;
-      display: none;
-      position: absolute;
-      white-space: nowrap;
+    /* Splitting */
+    .Resizer.horizontal, .Resizer.vertical {
+      background-color: var(--background-color);
+      filter: invert(50%);
+      box-sizing: border-box;
       z-index: 1;
-  }
+      background-clip: padding-box;
+      flex-shrink: 0;
+    }
+    .Resizer.horizontal {
+      height: 11px;
+      border-top: 5px solid rgba(255, 255, 255, 0);
+      border-bottom: 5px solid rgba(255, 255, 255, 0);
+      cursor: row-resize;
+      width: 100%;
+    }
+    .Pane.Pane2.horizontal {
+      display: flex;
+    }
+    .Resizer.vertical {
+      width: 11px;
+      margin: 0 -5px;
+      /* margin-right: 10px; */
+      border-left: 5px solid rgba(255, 255, 255, 0);
+      border-right: 5px solid rgba(255, 255, 255, 0);
+      cursor: col-resize;
+    }
 
-  .xterm .composition-view.active {
-      display: block;
-  }
+    archipelago-terminal {
+      height: 100%;
+      display: flex;
+      margin: 0px 0px 10px 15px;
+      width: ~"calc(100% - 15px)";
+      height: ~"calc(100% - 10px)";
 
-  .xterm .xterm-viewport {
-      /* On OS X this is required in order for the scroll bar to appear fully opaque */
-      background-color: #000;
-      overflow-y: scroll;
-  }
+      .xterm {
+        font-family: courier-new, courier, monospace;
+        font-feature-settings: "liga" 0;
+        position: relative;
+        user-select: none;
+        -ms-user-select: none;
+        -webkit-user-select: none;
+        height: 100%;
+      }
 
-  .xterm canvas {
-      position: absolute;
-      left: 0;
-      top: 0;
-  }
+      .xterm.focus, .xterm:focus {
+        outline: none;
+      }
 
-  .xterm .xterm-scroll-area {
-      visibility: hidden;
-  }
+      .xterm .xterm-helpers {
+        position: absolute;
+        top: 0;
+        /**
+        * The z-index of the helpers must be higher than the canvases in order for
+        * IMEs to appear on top.
+        */
+        z-index: 10;
+      }
 
-  .xterm .xterm-char-measure-element {
-      display: inline-block;
-      visibility: hidden;
-      position: absolute;
-      left: -9999em;
-  }
+      .xterm .xterm-helper-textarea {
+        /*
+        * HACK: to fix IE's blinking cursor
+        * Move textarea out of the screen to the far left, so that the cursor is not visible.
+        */
+        position: absolute;
+        opacity: 0;
+        left: -9999em;
+        top: 0;
+        width: 0;
+        height: 0;
+        z-index: -10;
+        /** Prevent wrapping so the IME appears against the textarea at the correct position */
+        white-space: nowrap;
+        overflow: hidden;
+        resize: none;
+      }
 
-  .xterm.enable-mouse-events {
-      /* When mouse events are enabled (eg. tmux), revert to the standard pointer cursor */
-      cursor: default;
-  }
+      .xterm .composition-view {
+        /* TODO: Composition position got messed up somewhere */
+        background: #000;
+        color: #FFF;
+        display: none;
+        position: absolute;
+        white-space: nowrap;
+        z-index: 1;
+      }
 
-  .xterm:not(.enable-mouse-events) {
-      cursor: text;
+      .xterm .composition-view.active {
+        display: block;
+      }
+
+      .xterm .xterm-viewport {
+        /* On OS X this is required in order for the scroll bar to appear fully opaque */
+        background-color: #000;
+        overflow-y: scroll;
+      }
+
+      .xterm canvas {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+      .xterm .xterm-scroll-area {
+        visibility: hidden;
+      }
+
+      .xterm .xterm-char-measure-element {
+        display: inline-block;
+        visibility: hidden;
+        position: absolute;
+        left: -9999em;
+      }
+
+      .xterm.enable-mouse-events {
+        /* When mouse events are enabled (eg. tmux), revert to the standard pointer cursor */
+        cursor: default;
+      }
+
+      .xterm:not(.enable-mouse-events) {
+        cursor: text;
+      }
+
+      // overrides
+      .xterm .xterm-viewport {
+        -webkit-transition: all .5s;
+        opacity: 0;
+      }
+      .xterm .xterm-viewport:hover, .xterm.scrolling .xterm-viewport {
+        opacity: 1;
+       -webkit-transition: all .5s;
+      }
+
+      .terminal {
+        width: 100%;
+      }
+      .xterm {
+        background-color: transparent;
+      }
+      .terminal .xterm-viewport {
+        background-color: transparent;
+      }
+    }
   }
 }
