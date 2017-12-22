@@ -24,8 +24,6 @@ class ArchipelagoView
 
     @_title = 'Archipelago'
 
-  serialize: ->
-
   destroy: ->
     @element.remove()
 

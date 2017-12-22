@@ -23,9 +23,6 @@ module.exports = Archipelago =
     @subscriptions.dispose()
     @archipelagoView.destroy()
 
-  serialize: ->
-    archipelagoViewState: @archipelagoView.serialize()
-
   open: ->
     view = new ArchipelagoView()
     @views.push(view)
