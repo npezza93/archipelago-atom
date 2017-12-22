@@ -14,6 +14,11 @@ module.exports = Archipelago =
       'archipelago:open': => @open()
     }
 
+    @subscriptions.add atom.commands.add '.archipelago', {
+      'archipelago:split-horizontally': => @split('horizontal')
+      'archipelago:split-vertically': => @split('vertical')
+    }
+
   deactivate: ->
     @subscriptions.dispose()
     @archipelagoView.destroy()
