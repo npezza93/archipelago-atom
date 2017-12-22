@@ -10,17 +10,11 @@ class ArchipelagoTerminal extends React.Component
     React.createElement('archipelago-terminal', { ref: "container" })
 
   componentDidMount: ->
-    @props.terminal.xterm.open(@refs.container, true)
-    @props.terminal.setBellStyle()
-    @props.terminal.updateSettings()
-    @props.terminal.xterm.focus()
-    @props.terminal.xterm.element.addEventListener 'wheel', () =>
-      clearTimeout(@scrollbarFade);
-      @scrollbarFade = setTimeout(
-        () => @props.terminal.xterm.element.classList.remove('scrolling'),
-        600
-      )
-      @props.terminal.xterm.element.classList.add('scrolling')
+    @props.session.xterm.open(@refs.container, true)
+    @props.session.setBellStyle()
+    @props.session.updateSettings()
+    @props.session.xterm.focus()
+    @props.session.fit()
 
   bindDataListeners: ->
     # @props.terminal.on 'focused', () =>
