@@ -1,2 +1,5 @@
 'atom-workspace':
-  'ctrl-alt-o': 'archipelago:toggle'
+  'ctrl-alt-a': 'archipelago:open'
+'.archipelago':
+  'cmd-s': 'archipelago:split-horizontally'
+  'cmd-shift-s': 'archipelago:split-vertically'
