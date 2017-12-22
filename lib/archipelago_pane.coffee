@@ -1,9 +1,26 @@
-React                = require('react')
+React    = require('react')
+Sessions = require('./sessions')
 ArchipelagoTerminal  = require('./archipelago_terminal')
 
 module.exports =
 class ArchipelagoPane extends React.Component
+  constructor: (props) ->
+    super(props)
+    @state = { sessions: new Sessions() }
+
   render: ->
     React.createElement(
-      'archipelago-pane', {}, @props.terminals.render(@props)
+      'archipelago-pane',
+      {},
+      @state.sessions.render({
+        setCurrentSession: @setCurrentSession.bind(this),
+        removeSession: @removeSession.bind(this),
+        setTitle: @props.setTitle
+      })
     )
+
+  setCurrentSession: (sessionId) ->
+    @setState(currentSession: sessionId)
+
+  removeSession: (sessionId) ->
+    @setState(sessions: @state.sessions.remove(sessionId))
