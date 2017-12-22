@@ -37,3 +37,6 @@ class ArchipelagoView
 
   onDidChangeTitle: (callback) ->
     @emitter.on('did-change-title', callback)
+
+  split: (orientation) ->
+    @pane.split(orientation)

@@ -26,3 +26,6 @@ module.exports = Archipelago =
     view = new ArchipelagoView()
     @views.push(view)
     atom.workspace.open(view)
+
+  split: (orientation) ->
+    atom.workspace.getActivePaneItem().split(orientation)

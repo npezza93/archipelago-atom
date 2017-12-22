@@ -27,3 +27,6 @@ class ArchipelagoPane extends React.Component
 
   removeSession: (sessionId) ->
     @setState(sessions: @state.sessions.remove(sessionId))
+
+  split: (orientation) ->
+    @setState(sessions: @state.sessions.add(@state.currentSession, orientation))
