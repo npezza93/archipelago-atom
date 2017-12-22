@@ -33,12 +33,9 @@ class Session
   render: (props) ->
     React.createElement(
       ArchipelagoTerminal, {
-        terminal: this,
+        session: this,
         key: @id,
-        tabId: props.id,
-        currentTab: props.currentTab,
         changeTitle: props.changeTitle,
-        markUnread: props.markUnread,
         removeTerminal: props.removeTerminal,
         selectTerminal: props.selectTerminal
       }
