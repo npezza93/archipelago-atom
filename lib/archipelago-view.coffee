@@ -19,6 +19,7 @@ class ArchipelagoView
     @_title = 'Archipelago'
 
   destroy: ->
+    @pane.kill()
     @element.remove()
 
   getElement: ->

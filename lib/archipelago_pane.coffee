@@ -19,6 +19,9 @@ class ArchipelagoPane extends React.Component
       })
     )
 
+  kill: ->
+    @state.sessions.kill()
+
   setCurrentSession: (sessionId) ->
     @setState(currentSession: sessionId)
 

@@ -21,7 +21,6 @@ module.exports = Archipelago =
 
   deactivate: ->
     @subscriptions.dispose()
-    @archipelagoView.destroy()
 
   open: ->
     view = new ArchipelagoView()
