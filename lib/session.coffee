@@ -35,9 +35,9 @@ class Session
       ArchipelagoTerminal, {
         session: this,
         key: @id,
-        removeTerminal: props.removeTerminal,
-        selectTerminal: props.selectTerminal
         setTitle: props.setTitle,
+        removeSession: props.removeSession,
+        setCurrentSession: props.setCurrentSession
       }
     )
 
