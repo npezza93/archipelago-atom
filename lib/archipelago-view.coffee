@@ -1,7 +1,7 @@
-Sessions        = require('./sessions')
-React           = require('react')
-ReactDOM        = require('react-dom')
-ArchipelagoPane = require('./archipelago_pane')
+React                            = require('react')
+ReactDOM                         = require('react-dom')
+ArchipelagoPane                  = require('./archipelago_pane')
+{ CompositeDisposable, Emitter } = require('atom')
 
 module.exports =
 class ArchipelagoView
