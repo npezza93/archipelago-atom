@@ -17,19 +17,12 @@ class ArchipelagoTerminal extends React.Component
     @props.session.fit()
 
   bindDataListeners: ->
-    # @props.terminal.on 'focused', () =>
-    #   @props.selectTerminal(@props.terminal.id)
-    #   @props.changeTitle(@props.tabId, @props.terminal.xterm.title)
-    #
-    # @props.terminal.on 'titleChanged', () =>
-    #   @props.changeTitle(@props.tabId, @props.terminal.xterm.title)
-    #
-    # @props.terminal.on 'exit', () =>
-    #   @props.removeTerminal(@props.tabId, @props.terminal.id)
-    #
-    # @props.terminal.on 'data', () =>
-    #   if @props.currentTab != @props.tabId
-    #     @props.markUnread(@props.tabId)
+    @props.session.on 'focused', () =>
+      @props.setCurrentSession(@props.session.id)
+      @props.setTitle(@props.session.xterm.title)
 
     @props.session.on 'titleChanged', () =>
       @props.setTitle(@props.session.xterm.title)
+
+    @props.session.on 'exit', () =>
+      @props.removeSession(@props.session.id)
