@@ -35,9 +35,9 @@ class Session
       ArchipelagoTerminal, {
         session: this,
         key: @id,
-        changeTitle: props.changeTitle,
         removeTerminal: props.removeTerminal,
         selectTerminal: props.selectTerminal
+        setTitle: props.setTitle,
       }
     )
 
@@ -111,8 +111,8 @@ class Session
       @fit()
       @emitter.emit('focused')
 
-    # @xterm.on 'title', (title) =>
-    #   @emitter.emit('titleChanged')
+    @xterm.on 'title', (title) =>
+      @emitter.emit('titleChanged')
 
     @pty.on 'data', (data) =>
       @xterm.write(data)

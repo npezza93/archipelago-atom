@@ -30,3 +30,6 @@ class ArchipelagoTerminal extends React.Component
     # @props.terminal.on 'data', () =>
     #   if @props.currentTab != @props.tabId
     #     @props.markUnread(@props.tabId)
+
+    @props.session.on 'titleChanged', () =>
+      @props.setTitle(@props.session.xterm.title)

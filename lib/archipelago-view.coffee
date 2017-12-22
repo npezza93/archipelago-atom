@@ -32,4 +32,8 @@ class ArchipelagoView
     @_title
 
   setTitle: (title) ->
+    @emitter.emit('did-change-title', title)
     @_title = title
+
+  onDidChangeTitle: (callback) ->
+    @emitter.on('did-change-title', callback)
