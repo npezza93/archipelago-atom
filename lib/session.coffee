@@ -1,6 +1,6 @@
 Pty                  = require('node-pty')
 defaultShell         = require('default-shell')
-{ EventEmitter }     = require('events')
+{ Emitter }          = require('atom')
 React                = require('react')
 ArchipelagoTerminal  = require('./archipelago_terminal')
 Terminal             = require('./xterm/xterm')
@@ -10,7 +10,7 @@ class Session
   constructor: (group) ->
     @id = Math.random()
     @group = group
-    @emitter = new EventEmitter()
+    @emitter = new Emitter()
     @pty = Pty.spawn(
       @settings('shell') || defaultShell,
       @settings('shellArgs').split(','),
