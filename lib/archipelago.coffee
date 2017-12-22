@@ -3,15 +3,12 @@ config                  = require('./config.json')
 { CompositeDisposable } = require('atom')
 
 module.exports = Archipelago =
-  archipelagoView: null
+  views: []
   subscriptions: null
   config: config
 
   activate: (state) ->
-    @archipelagoView = new ArchipelagoView(state.archipelagoViewState)
-
-    # Events subscribed to in atom's system can be easily cleaned up with a CompositeDisposable
-    @subscriptions = new CompositeDisposable();
+    @subscriptions = new CompositeDisposable()
 
     @subscriptions.add atom.commands.add 'atom-workspace', {
       'archipelago:open': => @open()
@@ -25,4 +22,6 @@ module.exports = Archipelago =
     archipelagoViewState: @archipelagoView.serialize()
 
   open: ->
-    atom.workspace.open(@archipelagoView)
+    view = new ArchipelagoView()
+    @views.push(view)
+    atom.workspace.open(view)
