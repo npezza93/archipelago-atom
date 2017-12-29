@@ -7,7 +7,7 @@
   "activationCommands": {
     "atom-workspace": "archipelago:open"
   },
-  "repository": "git://github.com/npezza93/archipelago#atom",
+  "repository": "git://github.com/npezza93/archipelago-atom",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
