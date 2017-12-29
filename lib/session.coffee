@@ -4,6 +4,8 @@ defaultShell         = require('default-shell')
 React                = require('react')
 ArchipelagoTerminal  = require('./archipelago_terminal')
 Terminal             = require('./xterm/xterm')
+{ isHotkey }        = require('is-hotkey')
+# ConfigFile          = require('../utils/config_file')
 
 module.exports =
 class Session
@@ -14,7 +16,7 @@ class Session
     @pty = Pty.spawn(
       @settings('shell') || defaultShell,
       @settings('shellArgs').split(','),
-      { name: 'xterm-256color', cwd: process.PWD, env: process.env }
+      { name: 'xterm-256color', cwd: process.env.HOME, env: process.env }
     )
     @xterm = new Terminal({
       fontFamily: @settings('fontFamily'),
@@ -24,6 +26,7 @@ class Session
       cursorStyle: @settings('cursorStyle'),
       cursorBlink: @settings('cursorBlink'),
       bellSound: @settings('bellSound'),
+      bellStyle: @settings('bellStyle'),
       scrollback: @settings('scrollback'),
       tabStopWidth: parseInt(@settings('tabStopWidth')),
       theme: @theme()
@@ -44,23 +47,23 @@ class Session
   isSession: ->
     true
 
-  kill: ->    
+  kill: ->
+    window.removeEventListener('resize', @fit.bind(this))
+
     @pty.kill()
     @xterm.destroy()
 
   on: (event, handler) ->
     @emitter.on(event, handler)
 
-  setBellStyle: ->
-    @xterm.setOption('bellStyle', @settings('bellStyle'))
-
   fit: ->
     @xterm.charMeasure.measure(@xterm.options)
     rows = Math.floor(@xterm.element.offsetHeight / @xterm.charMeasure.height)
     cols = Math.floor(@xterm.element.offsetWidth / @xterm.charMeasure.width) - 2
 
-    @xterm.resize(cols, rows)
-    @pty.resize(cols, rows)
+    try
+      @xterm.resize(cols, rows)
+      @pty.resize(cols, rows)
 
   settings: (setting) ->
     if setting
@@ -101,11 +104,13 @@ class Session
     @fit()
 
   bindDataListeners: ->
-    # @configFile.on 'change', () =>
-      # @updateSettings()
+    # @xterm.attachCustomKeyEventHandler(@keybindingHandler)
+    window.addEventListener 'resize', @fit.bind(this)
+    # @configFile.on 'change', @updateSettings.bind(this)
 
     @xterm.on 'data', (data) =>
-      @pty.write(data)
+      try
+        @pty.write(data)
 
     @xterm.on 'focus', () =>
       @fit()
@@ -120,6 +125,3 @@ class Session
 
     @pty.on 'exit', () =>
       @emitter.emit('exit')
-
-    window.addEventListener 'resize', () =>
-      @fit()

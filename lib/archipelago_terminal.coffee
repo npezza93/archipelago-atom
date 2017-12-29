@@ -11,7 +11,6 @@ class ArchipelagoTerminal extends React.Component
 
   componentDidMount: ->
     @props.session.xterm.open(@refs.container, true)
-    @props.session.setBellStyle()
     @props.session.updateSettings()
     @props.session.xterm.focus()
     @props.session.fit()

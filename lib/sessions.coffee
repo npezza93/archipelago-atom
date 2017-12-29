@@ -12,7 +12,7 @@ class Sessions
       group = @_newGroup(session, orientation)
       @root = group
     else
-      @_newGroup(@_find(@root, sessionId), orientation)
+      @_newGroup(@find(@root, sessionId), orientation)
 
     this
 
@@ -20,37 +20,51 @@ class Sessions
     if @root.isSession() && @root.id == sessionId
       @root = null
     else
-      sessionToRemove = @_find(@root, sessionId)
+      sessionToRemove = @find(@root, sessionId)
 
-      if sessionToRemove then sessionToRemove.kill()
+      return this unless sessionToRemove
+
+      sessionToRemove.kill()
 
       if sessionToRemove.group && sessionToRemove.group.left == sessionToRemove
         sessionToSave = sessionToRemove.group.right
-      else if sessionToRemove.group && sessionToRemove.group.right == sessionToRemove
+      else if sessionToRemove.group &&
+          sessionToRemove.group.right == sessionToRemove
         sessionToSave = sessionToRemove.group.left
 
       if sessionToSave.group == @root
         @root = sessionToSave
       else if sessionToSave.group.group.left == sessionToSave.group
         sessionToSave.group.group.left = sessionToSave
+        sessionToSave.group = sessionToSave.group.group
       else if sessionToSave.group.group.right == sessionToSave.group
         sessionToSave.group.group.right = sessionToSave
+        sessionToSave.group = sessionToSave.group.group
 
     this
 
   render: (props) ->
+    return unless @root
+
     @root.render(props)
 
   kill: ->
-    @root.kill()
+    if @root then @root.kill()
 
-  _find: (group, sessionId) ->
+  find: (group, sessionId) ->
     foundSession = null
-    @_traverse(group, (session) =>
+    @_traverse(group, (session) ->
       if session.id == sessionId then foundSession = session
     )
 
     foundSession
+
+  firstSession: ->
+    session = @root
+    until session.isSession()
+      session = session.left
+
+    session
 
   _traverse: (group, callback) ->
     unless group? then return
