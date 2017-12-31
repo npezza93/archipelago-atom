@@ -7,7 +7,7 @@ class ArchipelagoTerminal extends React.Component
     @bindDataListeners()
 
   render: ->
-    React.createElement('archipelago-terminal', { ref: "container" })
+    React.createElement('archipelago-terminal', ref: "container")
 
   componentDidMount: ->
     @props.session.xterm.open(@refs.container, true)

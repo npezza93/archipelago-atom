@@ -1,11 +1,11 @@
 Pty                  = require('node-pty')
 defaultShell         = require('default-shell')
-{ Emitter }          = require('atom')
 React                = require('react')
+{ Emitter }          = require('atom')
+{ isHotkey }         = require('is-hotkey')
+ConfigFile           = require('./config_file')
 ArchipelagoTerminal  = require('./archipelago_terminal')
 Terminal             = require('./xterm/xterm')
-{ isHotkey }        = require('is-hotkey')
-# ConfigFile          = require('../utils/config_file')
 
 module.exports =
 class Session
@@ -13,35 +13,36 @@ class Session
     @id = Math.random()
     @group = group
     @emitter = new Emitter()
+    @configFile = new ConfigFile()
     @pty = Pty.spawn(
-      @settings('shell') || defaultShell,
-      @settings('shellArgs').split(','),
-      { name: 'xterm-256color', cwd: process.env.HOME, env: process.env }
+      @settings('shell') || defaultShell
+      @settings('shellArgs').split(',')
+      name: 'xterm-256color', cwd: process.env.HOME, env: process.env
     )
-    @xterm = new Terminal({
-      fontFamily: @settings('fontFamily'),
-      fontSize: @settings('fontSize'),
-      lineHeight: @settings('lineHeight'),
-      letterSpacing: @settings('letterSpacing'),
-      cursorStyle: @settings('cursorStyle'),
-      cursorBlink: @settings('cursorBlink'),
-      bellSound: @settings('bellSound'),
-      bellStyle: @settings('bellStyle'),
-      scrollback: @settings('scrollback'),
-      tabStopWidth: parseInt(@settings('tabStopWidth')),
-      theme: @theme()
-    })
+
+    @xterm = new Terminal(
+      fontFamily: @settings('fontFamily')
+      fontSize: @settings('fontSize')
+      lineHeight: @settings('lineHeight')
+      letterSpacing: @settings('letterSpacing')
+      cursorStyle: @settings('cursorStyle')
+      cursorBlink: @settings('cursorBlink')
+      bellSound: @settings('bellSound')
+      bellStyle: @settings('bellStyle')
+      scrollback: @settings('scrollback')
+      tabStopWidth: parseInt(@settings('tabStopWidth'))
+      theme: @settings('theme')
+    )
     @bindDataListeners()
 
   render: (props) ->
     React.createElement(
-      ArchipelagoTerminal, {
-        session: this,
-        key: @id,
-        setTitle: props.setTitle,
-        removeSession: props.removeSession,
-        setCurrentSession: props.setCurrentSession
-      }
+      ArchipelagoTerminal
+      session: this
+      key: @id
+      setTitle: props.setTitle
+      removeSession: props.removeSession
+      setCurrentSession: props.setCurrentSession
     )
 
   isSession: ->
@@ -66,30 +67,29 @@ class Session
       @pty.resize(cols, rows)
 
   settings: (setting) ->
-    if setting
-      atom.config.get("archipelago")[setting]
+    if setting?
+      @configFile.atomSettings()[setting]
     else
-      atom.config.get("archipelago")
+      @configFile.atomSettings()
 
-  theme: ->
-    theme = {}
-    Object.entries(@settings('theme')).map (themeMapping) =>
-      theme[themeMapping[0]] = themeMapping[1].toHexString()
+  keybindingHandler: (e) =>
+    caught = false
+    keybindings = Object.values(@settings('keybindings')[process.platform])
 
-    theme
+    keybindings.forEach (keybinding) =>
+      if isHotkey(keybinding.accelerator, e)
+        command = keybinding.command.map (num) ->
+          String.fromCharCode(parseInt(num))
+        @pty.write(command.join(''))
+        caught = true
+
+    !caught
 
   updateSettings: ->
-    [
-      'fontFamily',
-      'lineHeight',
-      'cursorStyle',
-      'cursorBlink',
-      'bellSound',
-      'bellStyle',
-      'scrollback'
-    ].forEach (field) =>
-      if @xterm[field] != @settings(field)
-        @xterm.setOption(field, @settings(field))
+    ['fontFamily', 'lineHeight', 'cursorStyle', 'cursorBlink', 'bellSound',
+     'bellStyle', 'scrollback', 'theme'].forEach (field) =>
+       if @xterm[field] != @settings(field)
+         @xterm.setOption(field, @settings(field))
 
     ['tabStopWidth', 'fontSize', 'letterSpacing'].forEach (field) =>
       if @xterm[field] != parseInt(@settings(field))
@@ -99,14 +99,18 @@ class Session
       if @xterm[field] != parseFloat(@settings(field))
         @xterm.setOption(field, parseFloat(@settings(field)))
 
-    @xterm.setOption("theme", @theme())
-
+    @bindCopyOnSelect()
     @fit()
 
+  bindCopyOnSelect: ->
+    @xterm.selectionManager.on 'selection', () =>
+      if @settings('copyOnSelect')
+        document.execCommand('copy')
+
   bindDataListeners: ->
-    # @xterm.attachCustomKeyEventHandler(@keybindingHandler)
+    @xterm.attachCustomKeyEventHandler(@keybindingHandler)
     window.addEventListener 'resize', @fit.bind(this)
-    # @configFile.on 'change', @updateSettings.bind(this)
+    @configFile.on 'change', @updateSettings.bind(this)
 
     @xterm.on 'data', (data) =>
       try

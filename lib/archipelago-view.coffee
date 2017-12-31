@@ -7,23 +7,23 @@ module.exports =
 class ArchipelagoView
   constructor: (serializedState) ->
     @subscriptions = new CompositeDisposable()
-    @element = document.createElement('div')
-    @element.classList.add('archipelago')
-    @emitter = new Emitter()
+    @_element = document.createElement('div')
+    @_element.classList.add('archipelago')
+    @_emitter = new Emitter()
 
-    @pane = ReactDOM.render(
-      React.createElement(ArchipelagoPane, { setTitle: @setTitle.bind(this)}),
-      @element
+    @_pane = ReactDOM.render(
+      React.createElement(ArchipelagoPane, setTitle: @setTitle.bind(this))
+      @_element
     )
 
     @_title = 'Archipelago'
 
   destroy: ->
-    @pane.kill()
-    @element.remove()
+    @_pane.kill()
+    @_element.remove()
 
   getElement: ->
-    @element
+    @_element
 
   getIconName: ->
     'terminal'
@@ -32,11 +32,11 @@ class ArchipelagoView
     @_title
 
   setTitle: (title) ->
-    @emitter.emit('did-change-title', title)
+    @_emitter.emit('did-change-title', title)
     @_title = title
 
   onDidChangeTitle: (callback) ->
-    @emitter.on('did-change-title', callback)
+    @_emitter.on('did-change-title', callback)
 
   split: (orientation) ->
-    @pane.split(orientation)
+    @_pane.split(orientation)

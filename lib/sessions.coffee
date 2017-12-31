@@ -17,7 +17,7 @@ class Sessions
     this
 
   remove: (sessionId) ->
-    if @root.isSession() && @root.id == sessionId
+    if @root && @root.isSession() && @root.id == sessionId
       @root = null
     else
       sessionToRemove = @find(@root, sessionId)

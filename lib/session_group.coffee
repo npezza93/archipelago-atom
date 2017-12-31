@@ -12,10 +12,11 @@ class SessionGroup
 
   render: (props) ->
     React.createElement(
-      SplitPane, {
-        split: @orientation,
-        defaultSize: '50%'
-      }, @left.render(props), @right.render(props)
+      SplitPane
+      split: @orientation
+      defaultSize: '50%'
+      @left.render(props)
+      @right.render(props)
     )
 
   kill: ->
