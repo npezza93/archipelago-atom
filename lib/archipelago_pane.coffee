@@ -30,3 +30,6 @@ class ArchipelagoPane extends React.Component
 
   split: (orientation) ->
     @setState(sessions: @state.sessions.add(@state.currentSession, orientation))
+
+  currentSession: ->
+    @state.sessions.find(@state.sessions.root, @state.currentSession)

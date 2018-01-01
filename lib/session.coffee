@@ -105,7 +105,13 @@ class Session
   bindCopyOnSelect: ->
     @xterm.selectionManager.on 'selection', () =>
       if @settings('copyOnSelect')
-        document.execCommand('copy')
+        @copy()
+
+  copy: ->
+    atom.clipboard.write(@xterm.getSelection())
+
+  paste: ->
+    @pty.write(atom.clipboard.read())
 
   bindDataListeners: ->
     @xterm.attachCustomKeyEventHandler(@keybindingHandler)

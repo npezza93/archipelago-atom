@@ -16,6 +16,8 @@ module.exports = Archipelago =
     @subscriptions.add atom.commands.add '.archipelago',
       'archipelago:split-horizontally': => @split('horizontal')
       'archipelago:split-vertically': => @split('vertical')
+      'archipelago:copy': => @handleCopy()
+      'archipelago:paste': => @handlePaste()
 
   deactivate: ->
     @subscriptions.dispose()
@@ -27,3 +29,9 @@ module.exports = Archipelago =
 
   split: (orientation) ->
     atom.workspace.getActivePaneItem().split(orientation)
+
+  handleCopy: ->
+    atom.workspace.getActivePaneItem().copy()
+
+  handlePaste: ->
+    atom.workspace.getActivePaneItem().paste()

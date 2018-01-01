@@ -40,3 +40,9 @@ class ArchipelagoView
 
   split: (orientation) ->
     @_pane.split(orientation)
+
+  copy: ->
+    @_pane.currentSession().copy()
+
+  paste: ->
+    @_pane.currentSession().paste()
