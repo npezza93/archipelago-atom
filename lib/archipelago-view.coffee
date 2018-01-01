@@ -2,11 +2,13 @@ React                            = require('react')
 ReactDOM                         = require('react-dom')
 ArchipelagoPane                  = require('./archipelago_pane')
 { CompositeDisposable, Emitter } = require('atom')
+ConfigFile                       = require('./config_file')
 
 module.exports =
 class ArchipelagoView
   constructor: (serializedState) ->
     @subscriptions = new CompositeDisposable()
+    @configFile = new ConfigFile()
     @_element = document.createElement('div')
     @_element.classList.add('archipelago')
     @_emitter = new Emitter()
@@ -17,6 +19,8 @@ class ArchipelagoView
     )
 
     @_title = 'Archipelago'
+    @setPaneBackground()
+    @configFile.on 'change', @setPaneBackground.bind(this)
 
   destroy: ->
     @_pane.kill()
@@ -46,3 +50,6 @@ class ArchipelagoView
 
   paste: ->
     @_pane.currentSession().paste()
+
+  setPaneBackground: ->
+    @_element.style.background = @configFile.atomSettings().windowBackground
