@@ -52,4 +52,6 @@ class ArchipelagoView
     @_pane.currentSession().paste()
 
   setPaneBackground: ->
-    @_element.style.background = @configFile.atomSettings().windowBackground
+    @_element.style.setProperty(
+      '--archipelago-background-color', @configFile.atomSettings().windowBackground
+    )
