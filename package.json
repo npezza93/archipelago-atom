@@ -1,9 +1,8 @@
 {
-  "name": "archipelago",
+  "name": "Archipelago",
   "main": "./lib/archipelago",
   "version": "0.1.0",
-  "description": "A short description of your package",
-  "keywords": [],
+  "description": "Archipelago for Atom is an extension of the Archipelago desktop app for Atom.",
   "activationCommands": {
     "atom-workspace": "archipelago:open"
   },
@@ -21,5 +20,23 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-split-pane": "^0.1.74"
-  }
+  },
+  "keywords": [
+    "archipelago",
+    "terminal",
+    "xterm",
+    "terminal-emulators",
+    "react",
+    "javascript",
+    "html",
+    "css"
+  ],
+  "author": {
+    "name": "Nick Pezza",
+    "email": "npezza93@gmail.com"
+  },
+  "homepage": "https://github.com/npezza93/archipelago-atom",
+  "bugs": {
+    "url": "https://github.com/npezza93/archipelago-atom/issues"
+  },
 }
