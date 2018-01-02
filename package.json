@@ -6,6 +6,9 @@
   "activationCommands": {
     "atom-workspace": "archipelago:open"
   },
+  "scripts": {
+    "lint": "coffeelint lib/*.coffee"
+  },
   "repository": "git://github.com/npezza93/archipelago-atom",
   "license": "MIT",
   "engines": {
