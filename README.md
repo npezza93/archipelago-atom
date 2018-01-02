@@ -1,7 +1,8 @@
 <p align="center">
   <a href="https://github.com/npezza93/archipelago-atom">
     <img src="https://github.com/npezza93/archipelago-atom/blob/master/.github/logo.png" width="150" valign="middle">
-    <img src="https://github.com/npezza93/archipelago-atom/blob/master/.github/atom.png" width="75" valign="middle">
+    +
+    <img src="https://github.com/npezza93/archipelago-atom/blob/master/.github/atom.png" width="75" valign="middle" vspace="40" hspace="25">
   </a>
 
   <h3 align="center">Archipelago for Atom</h3>
