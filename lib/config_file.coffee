@@ -9,13 +9,14 @@ module.exports =
 class ConfigFile
   constructor: ->
     @_file = new File(join(homedir(), '.archipelago.json'))
-    window.archfile = this
-    unless @_file.exists()
-      @write(
-        activeProfile: 1
-        profiles:
-          1: @constructor.defaultProfile(1)
-      )
+    @_file.exists().then (exists) =>
+      unless exists
+        @_file.create()
+        @write(
+          activeProfile: 1
+          profiles:
+            1: @constructor.defaultProfile(1)
+        )
 
     @emitter = new Emitter()
     @_file.onDidChange(@changedCallback.bind(this))
