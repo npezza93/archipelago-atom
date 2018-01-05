@@ -4,6 +4,10 @@
     "default": 1,
     "minimum": 0
   },
+  "copyOnSelect": {
+    "type": "boolean",
+    "default": true
+  },
   "letterSpacing": {
     "type": "number",
     "default": 0,
@@ -11,7 +15,7 @@
   },
   "scrollback": {
     "type": "integer",
-    "default": 1000,
+    "default": 4000,
     "minimum": 0
   },
   "tabStopWidth": {
@@ -34,7 +38,7 @@
   },
   "cursorBlink": {
     "type": "boolean",
-    "default": false
+    "default": true
   },
   "cursorStyle": {
     "type": "string",
@@ -62,12 +66,14 @@
         "default": "none",
         "enum": [
           "none",
-          "visual",
-          "sound",
-          "both"
+          "sound"
         ]
       }
     }
+  },
+  "windowBackground": {
+    "type": "color",
+    "default": "#292A35"
   },
   "theme": {
     "type": "object",
@@ -78,7 +84,7 @@
       },
       "background": {
         "type": "color",
-        "default": "#000000"
+        "default": "#292A35"
       },
       "selection": {
         "type": "color",
@@ -90,71 +96,71 @@
       },
       "cursorAccent": {
         "type": "color",
-        "default": "#000000"
+        "default": "#292A35"
       },
       "red": {
         "type": "color",
-        "default": "#cc0000"
+        "default": "#ff5c57"
       },
       "brightRed": {
         "type": "color",
-        "default": "#ef2929"
+        "default": "#ff5c57"
       },
       "green": {
         "type": "color",
-        "default": "#4e9a06"
+        "default": "#5af78e"
       },
       "brightGreen": {
         "type": "color",
-        "default": "#8ae234"
+        "default": "#5af78e"
       },
       "yellow": {
         "type": "color",
-        "default": "#c4a000"
+        "default": "#f3f99d"
       },
       "brightYellow": {
         "type": "color",
-        "default": "#fce94f"
+        "default": "#f3f99d"
       },
       "magenta": {
         "type": "color",
-        "default": "#75507b"
+        "default": "#ff6ac1"
       },
       "brightMagenta": {
         "type": "color",
-        "default": "#ad7fa8"
+        "default": "#ff6ac1"
       },
       "cyan": {
         "type": "color",
-        "default": "#06989a"
+        "default": "#5fcbd8"
       },
       "brightCyan": {
         "type": "color",
-        "default": "#34e2e2"
+        "default": "#5fcbd8"
       },
       "blue": {
         "type": "color",
-        "default": "#3465a4"
+        "default": "#57c7ff"
       },
       "brightBlue": {
         "type": "color",
-        "default": "#729fcf"
+        "default": "#57c7ff"
       },
       "white": {
         "type": "color",
-        "default": "#d3d7cf"
+        "default": "#ffffff"
       },
       "brightWhite": {
         "type": "color",
-        "default": "#eeeeec"
+        "default": "#FFFFFF"
       },
       "black": {
         "type": "color",
-        "default": "#2e3436"
+        "default": "#000000"
       },
       "brightBlack": {
         "type": "color",
-        "default": "#555753"
+        "default": "#808080"
       }
     }
   }

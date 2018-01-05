@@ -2,7 +2,7 @@ ArchipelagoView         = require('./archipelago-view')
 config                  = require('./config.json')
 { CompositeDisposable } = require('atom')
 
-module.exports = Archipelago =
+module.exports =
   views: []
   subscriptions: null
   config: config

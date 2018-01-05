@@ -7,21 +7,21 @@ class ArchipelagoTerminal extends React.Component
     @bindDataListeners()
 
   render: ->
-    React.createElement('archipelago-terminal', ref: "container")
+    React.createElement('archipelago-terminal', ref: 'container')
 
   componentDidMount: ->
     @props.session.xterm.open(@refs.container, true)
-    @props.session.updateSettings()
+    @props.session.xterm.setOption('theme', @props.session.getTheme())
     @props.session.xterm.focus()
     @props.session.fit()
 
   bindDataListeners: ->
-    @props.session.on 'focused', () =>
+    @props.session.on 'did-focus', () =>
       @props.setCurrentSession(@props.session.id)
       @props.setTitle(@props.session.xterm.title)
 
-    @props.session.on 'titleChanged', () =>
+    @props.session.on 'did-title-change', () =>
       @props.setTitle(@props.session.xterm.title)
 
-    @props.session.on 'exit', () =>
+    @props.session.on 'did-exit', () =>
       @props.removeSession(@props.session.id)
