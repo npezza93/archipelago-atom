@@ -53,27 +53,22 @@
     "type": "string",
     "default": "--login"
   },
-  "bell": {
-    "type": "object",
-    "properties": {
-      "sound": {
-        "description": "Can be a music(ogg, mp3, etc.) link or uri",
-        "type": "string",
-        "default": "https://raw.githubusercontent.com/chromium/hterm/master/audio/bell.ogg"
-      },
-      "style": {
-        "type": "string",
-        "default": "none",
-        "enum": [
-          "none",
-          "sound"
-        ]
-      }
-    }
+  "bellSound": {
+    "description": "Can be a music(ogg, mp3, etc.) link or uri",
+    "type": "string",
+    "default": "https://raw.githubusercontent.com/chromium/hterm/master/audio/bell.ogg"
+  },
+  "bellStyle": {
+    "type": "string",
+    "default": "none",
+    "enum": [
+      "none",
+      "sound"
+    ]
   },
   "windowBackground": {
     "type": "color",
-    "default": "#292A35"
+    "default": "#282c34"
   },
   "theme": {
     "type": "object",
@@ -84,7 +79,7 @@
       },
       "background": {
         "type": "color",
-        "default": "#292A35"
+        "default": "#282c34"
       },
       "selection": {
         "type": "color",
@@ -96,7 +91,7 @@
       },
       "cursorAccent": {
         "type": "color",
-        "default": "#292A35"
+        "default": "#282c34"
       },
       "red": {
         "type": "color",
