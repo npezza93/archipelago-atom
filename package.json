@@ -9,7 +9,7 @@
   "scripts": {
     "lint": "coffeelint lib/*.coffee"
   },
-  "repository": "git://github.com/npezza93/archipelago-atom",
+  "repository": "https://github.com/npezza93/archipelago-atom.git",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
