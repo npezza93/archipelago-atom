@@ -14,20 +14,23 @@
   </p>
 </p>
 
-## Demo
+## Usage
+Navigate to the packages menu -> Archipelago -> Open Terminal or the corresponding
+keybinding. Once a terminal has been opened you can split the focused terminal in half, vertically or horizontally. To split on macOS you can press cmd-s(vertically) or cmd-shift-s(horizontally) or ctrl-s(vertically) or ctrl-shift-s(horizontally) on Windows and Linux.
 
-#### demo goes here
-<!-- ![Screenshot](https://raw.githubusercontent.com/npezza93/archipelago/master/.github/screenshot.png) -->
+#### Keybindings
+There are a couple default keybindings declared for the terminal that correspond to unicode escape sequences like jump to the beginning or end of line.
+These can be found inside Atom's config where you can modify or remove any keybindings.  
+
+![Demo](https://raw.githubusercontent.com/npezza93/archipelago-atom/master/.github/demo.gif)
 
 ## Contributing
 Bug reports and pull requests are welcome on [GitHub](https://github.com/npezza93/archipelago-atom).
 
 ## Development
-Regardless of the platform you are working on, you will need to have Yarn installed. If you have never installed Yarn before, you can find out how [here](https://yarnpkg.com/en/docs/install).
+`apm develop archipelago`
 
-1.  Clone the repo
-1.  yarn
-1.  yarn start
+This will clone the archipelago package into $HOME/github/archipelago. Open this directory in Atom's dev mode and hack away.
 
 ## License
 
