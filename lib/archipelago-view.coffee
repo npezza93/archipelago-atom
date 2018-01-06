@@ -49,9 +49,13 @@ class ArchipelagoView
     @_pane.split(orientation)
 
   copy: ->
+    return unless @_pane.currentSession()
+
     @_pane.currentSession().copy()
 
   paste: ->
+    return unless @_pane.currentSession()
+
     @_pane.currentSession().paste()
 
   onDidChangeWindowBackground: (color) ->
