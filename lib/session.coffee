@@ -93,8 +93,9 @@ class Session
     if atom.config.get('archipelago.keybindings')
       atom.config.get('archipelago.keybindings')
     else
-      atom.config.set('archipelago.keybindings', defaultKeybindings[process.platform])
-      defaultKeybindings[process.platform]
+      keybindings = defaultKeybindings[process.platform]
+      atom.config.set('archipelago.keybindings', keybindings)
+      keybindings
 
   getTheme: (themeObj) ->
     theme = {}
