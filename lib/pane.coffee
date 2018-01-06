@@ -22,13 +22,13 @@ class Pane extends React.Component
     @state.sessions.kill()
 
   setCurrentSession: (sessionId) ->
-    @props.currentSession = sessionId
+    @currentSessionId = sessionId
 
   removeSession: (sessionId) ->
     @setState(sessions: @state.sessions.remove(sessionId))
 
   split: (orientation) ->
-    @setState(sessions: @state.sessions.add(@props.currentSession, orientation))
+    @setState(sessions: @state.sessions.add(@currentSessionId, orientation))
 
   currentSession: ->
-    @state.sessions.find(@state.sessions.root, @props.currentSession)
+    @state.sessions.find(@state.sessions.root, @currentSessionId)
