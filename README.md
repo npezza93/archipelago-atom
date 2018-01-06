@@ -16,7 +16,7 @@
 
 ## Usage
 Navigate to the packages menu -> Archipelago -> Open Terminal or the corresponding
-keybinding. Once a terminal has been opened you can split the focused terminal in half, vertically or horizontally. To split on macOS you can press cmd-s(vertically) or cmd-shift-s(horizontally) or ctrl-s(vertically) or ctrl-shift-s(horizontally) on Windows and Linux.
+keybinding. Once a terminal has been opened you can split the focused terminal in half, vertically or horizontally. To split on macOS you can press cmd-s(horizontally) or cmd-shift-s(vertically) or ctrl-s(horizontally) or ctrl-shift-s(vertically) on Windows and Linux.
 
 #### Keybindings
 There are a couple default keybindings declared for the terminal that correspond to unicode escape sequences like jump to the beginning or end of line.
