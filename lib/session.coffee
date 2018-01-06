@@ -42,6 +42,7 @@ class Session
       setTitle: props.setTitle
       removeSession: props.removeSession
       setCurrentSession: props.setCurrentSession
+      closeTab: props.closeTab
     )
 
   isSession: ->

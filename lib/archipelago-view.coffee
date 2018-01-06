@@ -10,7 +10,11 @@ class ArchipelagoView
     @_emitter = new Emitter()
 
     @_pane = ReactDOM.render(
-      React.createElement(Pane, setTitle: @setTitle.bind(this))
+      React.createElement(
+        Pane
+        setTitle: @setTitle.bind(this)
+        closeTab: @closeTab.bind(this)
+      )
       @getElement()
     )
 
@@ -67,3 +71,7 @@ class ArchipelagoView
     atom.config.onDidChange(
       'archipelago.windowBackground', @onDidChangeWindowBackground.bind(this)
     )
+
+  closeTab: ->
+    tab = atom.workspace.paneForItem(this)
+    if tab then tab.destroyItem(this)

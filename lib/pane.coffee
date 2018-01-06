@@ -15,6 +15,7 @@ class Pane extends React.Component
         setCurrentSession: @setCurrentSession.bind(this)
         removeSession: @removeSession.bind(this)
         setTitle: @props.setTitle
+        closeTab: @closeTab.bind(this)
       )
     )
 
@@ -32,3 +33,6 @@ class Pane extends React.Component
 
   currentSession: ->
     @state.sessions.find(@state.sessions.root, @currentSessionId)
+
+  closeTab: ->
+    if @state.sessions.root == null then @props.closeTab()

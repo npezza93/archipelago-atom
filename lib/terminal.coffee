@@ -25,3 +25,4 @@ class Terminal extends React.Component
 
     @props.session.on 'did-exit', () =>
       @props.removeSession(@props.session.id)
+      @props.closeTab()
