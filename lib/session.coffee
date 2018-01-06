@@ -1,10 +1,10 @@
 Pty                 = require('node-pty')
 defaultShell        = require('default-shell')
 React               = require('react')
+Xterm               = require('xterm').Terminal
 { Emitter }         = require('atom')
 { isHotkey }        = require('is-hotkey')
-ArchipelagoTerminal = require('./archipelago_terminal')
-Terminal            = require('./xterm/xterm')
+Terminal            = require('./terminal')
 
 module.exports =
 class Session
@@ -18,7 +18,7 @@ class Session
       name: 'xterm-256color', cwd: process.env.HOME, env: process.env
     )
 
-    @xterm = new Terminal(
+    @xterm = new Xterm(
       fontFamily: @settings('fontFamily')
       fontSize: @settings('fontSize')
       lineHeight: @settings('lineHeight')
@@ -36,7 +36,7 @@ class Session
 
   render: (props) ->
     React.createElement(
-      ArchipelagoTerminal
+      Terminal
       session: this
       key: @id
       setTitle: props.setTitle
@@ -85,30 +85,6 @@ class Session
 
     !caught
 
-  updateSettings: ->
-    ['fontFamily', 'cursorStyle', 'cursorBlink', 'scrollback',
-     'enableBold', 'tabStopWidth', 'fontSize', 'letterSpacing',
-     'lineHeight'].forEach (field) =>
-       atom.config.onDidChange "archipelago.#{field}", (newValue) =>
-         @xterm.setOption(field, newValue)
-
-    atom.config.onDidChange 'archipelago.bell.sound', (newValue) =>
-      @xterm.setOption('bellSound', newValue)
-
-    atom.config.onDidChange 'archipelago.bell.style', (newValue) =>
-      @xterm.setOption('bellStyle', newValue)
-
-    atom.config.onDidChange 'archipelago.theme', (newValue) =>
-      @xterm.setOption(field, @getTheme(newValue))
-
-    @bindCopyOnSelect()
-    @fit()
-
-  bindCopyOnSelect: ->
-    @xterm.selectionManager.on 'selection', () =>
-      if @settings('copyOnSelect')
-        @copy()
-
   copy: ->
     atom.clipboard.write(@xterm.getSelection())
 
@@ -118,8 +94,6 @@ class Session
   keybindings: ->
     {
       "linux": [
-        { "accelerator": "ctrl+left", "command": [27, 98] },
-        { "accelerator": "ctrl+right", "command": [27, 102] },
         { "accelerator": "home", "command": [27, 79, 72] },
         { "accelerator": "end", "command": [27, 79, 70] },
         { "accelerator": "ctrl+backspace", "command": [27, 127] },
@@ -128,8 +102,6 @@ class Session
         { "accelerator": "ctrl+end", "command": [16, 66] }
       ],
       "win32": [
-        { "accelerator": "ctrl+left", "command": [27, 98] },
-        { "accelerator":"ctrl+right", "command": [27, 102] },
         { "accelerator": "home", "command": [27, 79, 72] },
         { "accelerator": "end", "command": [27, 79, 70] },
         { "accelerator": "ctrl+backspace", "command": [27, 127] },
@@ -138,8 +110,6 @@ class Session
         { "accelerator": "ctrl+end", "command": [16, 66] }
       ],
       "darwin": [
-        { "accelerator": "alt+left", "command": [27, 98] },
-        { "accelerator": "alt+right", "command": [27, 102] },
         { "accelerator": "command+left", "command": [27, 79, 72] },
         { "accelerator": "command+right", "command": [27, 79, 70] },
         { "accelerator": "alt+backspace", "command": [27, 127] },
@@ -152,7 +122,10 @@ class Session
   getTheme: (themeObj) ->
     theme = {}
     for name, color of (themeObj || atom.config.get('archipelago.theme'))
-      theme[name] = color.toHexString()
+      if color.alpha < 1
+        theme[name] = color.toRGBAString()
+      else
+        theme[name] = color.toHexString()
 
     theme
 
@@ -171,8 +144,21 @@ class Session
     @xterm.on 'title', (title) =>
       @emitter.emit('did-title-change')
 
+    @xterm.on 'selection', () =>
+      if @settings('copyOnSelect')
+        @copy()
+
     @pty.on 'data', (data) =>
       @xterm.write(data)
 
     @pty.on 'exit', () =>
       @emitter.emit('did-exit')
+
+    ['fontFamily', 'cursorStyle', 'cursorBlink', 'scrollback',
+     'enableBold', 'tabStopWidth', 'fontSize', 'letterSpacing',
+     'lineHeight', 'bellSound', 'bellStyle'].forEach (field) =>
+       atom.config.onDidChange "archipelago.#{field}", (newValue) =>
+         @xterm.setOption(field, newValue)
+
+    atom.config.onDidChange 'archipelago.theme', (newValue) =>
+      @xterm.setOption(field, @getTheme(newValue))
