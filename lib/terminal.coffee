@@ -20,7 +20,7 @@ class Terminal extends React.Component
       @props.setCurrentSession(@props.session.id)
       @props.setTitle(@props.session.xterm.title)
 
-    @props.session.on 'did-title-changed', () =>
+    @props.session.on 'titleChanged', () =>
       @props.setTitle(@props.session.xterm.title)
 
     @props.session.on 'did-exit', () =>

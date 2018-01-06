@@ -142,7 +142,7 @@ class Session
       @emitter.emit('did-focus')
 
     @xterm.on 'title', (title) =>
-      @emitter.emit('did-title-change')
+      @emitter.emit('titleChanged')
 
     @xterm.on 'selection', () =>
       if @settings('copyOnSelect')
