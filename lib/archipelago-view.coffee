@@ -1,7 +1,7 @@
 React                            = require('react')
 ReactDOM                         = require('react-dom')
 { CompositeDisposable, Emitter } = require('atom')
-ArchipelagoPane                  = require('./archipelago_pane')
+Pane                             = require('./pane')
 
 module.exports =
 class ArchipelagoView
@@ -10,7 +10,7 @@ class ArchipelagoView
     @_emitter = new Emitter()
 
     @_pane = ReactDOM.render(
-      React.createElement(ArchipelagoPane, setTitle: @setTitle.bind(this))
+      React.createElement(Pane, setTitle: @setTitle.bind(this))
       @getElement()
     )
 
