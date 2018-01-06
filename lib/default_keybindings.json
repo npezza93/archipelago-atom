@@ -1,0 +1,32 @@
+{
+  "linux": [
+    { "keystroke": "ctrl-left", "command": "\u001bb" },
+    { "keystroke": "ctrl-right", "command": "\u001bf" },
+    { "keystroke": "home", "command": "\u001bOH" },
+    { "keystroke": "end", "command": "\u001bOF" },
+    { "keystroke": "ctrl-backspace", "command": "\u001b" },
+    { "keystroke": "ctrl-del", "command": "\u001bd" },
+    { "keystroke": "ctrl-home", "command": "\u001bw" },
+    { "keystroke": "ctrl-end", "command": "\u0010B" }
+  ],
+  "win32": [
+    { "keystroke": "ctrl-left", "command": "\u001bb" },
+    { "keystroke": "ctrl-right", "command": "\u001bf" },
+    { "keystroke": "home", "command": "\u001bOH" },
+    { "keystroke": "end", "command": "\u001bOF" },
+    { "keystroke": "ctrl-backspace", "command": "\u001b" },
+    { "keystroke": "ctrl-del", "command": "\u001bd" },
+    { "keystroke": "ctrl-home", "command": "\u001bw" },
+    { "keystroke": "ctrl-end", "command": "\u0010B" }
+  ],
+  "darwin": [
+    { "keystroke": "alt-left", "command": "\u001bb" },
+    { "keystroke": "alt-right", "command": "\u001bf" },
+    { "keystroke": "cmd-left", "command": "\u001bOH" },
+    { "keystroke": "cmd-right", "command": "\u001bOF" },
+    { "keystroke": "alt-backspace", "command": "\u001b" },
+    { "keystroke": "alt-delete", "command": "\u001bd" },
+    { "keystroke": "cmd-backspace", "command": "\u001bw" },
+    { "keystroke": "cmd-delete", "command": "\u0010B" }
+  ]
+}

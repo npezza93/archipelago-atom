@@ -5,6 +5,7 @@ Xterm               = require('xterm').Terminal
 { Emitter }         = require('atom')
 { isHotkey }        = require('is-hotkey')
 Terminal            = require('./terminal')
+defaultKeybindings  = require('./default_keybindings')
 
 module.exports =
 class Session
@@ -77,10 +78,8 @@ class Session
     caught = false
 
     @keybindings().forEach (keybinding) =>
-      if isHotkey(keybinding.accelerator, e)
-        command = keybinding.command.map (num) ->
-          String.fromCharCode(parseInt(num))
-        @pty.write(command.join(''))
+      if atom.keymaps.keystrokeForKeyboardEvent(e) == keybinding.keystroke
+        @pty.write(keybinding.command)
         caught = true
 
     !caught
@@ -92,32 +91,11 @@ class Session
     @pty.write(atom.clipboard.read())
 
   keybindings: ->
-    {
-      "linux": [
-        { "accelerator": "home", "command": [27, 79, 72] },
-        { "accelerator": "end", "command": [27, 79, 70] },
-        { "accelerator": "ctrl+backspace", "command": [27, 127] },
-        { "accelerator": "ctrl+del", "command": [27, 100] },
-        { "accelerator": "ctrl+home", "command": [27, 119] },
-        { "accelerator": "ctrl+end", "command": [16, 66] }
-      ],
-      "win32": [
-        { "accelerator": "home", "command": [27, 79, 72] },
-        { "accelerator": "end", "command": [27, 79, 70] },
-        { "accelerator": "ctrl+backspace", "command": [27, 127] },
-        { "accelerator": "cltr+del", "command": [27, 100] },
-        { "accelerator": "ctrl+home", "command": [27, 119] },
-        { "accelerator": "ctrl+end", "command": [16, 66] }
-      ],
-      "darwin": [
-        { "accelerator": "command+left", "command": [27, 79, 72] },
-        { "accelerator": "command+right", "command": [27, 79, 70] },
-        { "accelerator": "alt+backspace", "command": [27, 127] },
-        { "accelerator": "alt+delete", "command": [27, 100] },
-        { "accelerator": "command+backspace", "command": [27, 119] },
-        { "accelerator": "command+delete", "command": [16, 66] }
-      ]
-    }[process.platform]
+    if atom.config.get('archipelago.keybindings')
+      atom.config.get('archipelago.keybindings')
+    else
+      atom.config.set('archipelago.keybindings', defaultKeybindings[process.platform])
+      defaultKeybindings[process.platform]
 
   getTheme: (themeObj) ->
     theme = {}
