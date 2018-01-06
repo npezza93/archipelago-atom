@@ -3,7 +3,6 @@ defaultShell        = require('default-shell')
 React               = require('react')
 Xterm               = require('xterm').Terminal
 { Emitter }         = require('atom')
-{ isHotkey }        = require('is-hotkey')
 Terminal            = require('./terminal')
 defaultKeybindings  = require('./default_keybindings')
 

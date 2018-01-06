@@ -15,9 +15,7 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "dependencies": {
-    "chokidar": "^1.7.0",
     "default-shell": "^1.0.1",
-    "nested-property": "0.0.7",
     "node-pty": "^0.7.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
