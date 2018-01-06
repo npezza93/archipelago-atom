@@ -1,4 +1,14 @@
 {
+  "dockLocation": {
+    "type": "string",
+    "default": "center",
+    "enum": [
+      "left",
+      "right",
+      "bottom",
+      "center"
+    ]
+  },
   "lineHeight": {
     "type": "number",
     "default": 1,
