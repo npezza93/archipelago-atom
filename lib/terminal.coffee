@@ -16,7 +16,7 @@ class Terminal extends React.Component
       () =>
         @props.session.fit()
         @props.session.xterm.focus()
-      100
+      300
     )
 
   bindDataListeners: ->
