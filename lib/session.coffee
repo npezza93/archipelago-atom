@@ -15,7 +15,9 @@ class Session
     @pty = Pty.spawn(
       @settings('shell') || defaultShell
       @settings('shellArgs').split(',')
-      name: 'xterm-256color', cwd: process.env.HOME, env: {}
+      name: 'xterm-256color'
+      cwd: @projectPath() || process.env.HOME
+      env: {}
     )
 
     @xterm = new Xterm(
@@ -83,6 +85,12 @@ class Session
         caught = true
 
     !caught
+
+  projectPath: ->
+    file_path = atom.workspace.getActiveTextEditor()?.getPath()
+    return unless file_path
+
+    atom.project.relativizePath(file_path)[0]
 
   copy: ->
     atom.clipboard.write(@xterm.getSelection())
