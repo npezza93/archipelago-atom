@@ -6,7 +6,7 @@
       'submenu': [
         {
           'label': 'Spawn Terminal'
-          'command': 'archipelago:spawn'
+          'command': 'archipelago:toggle'
         }
       ]
     ]

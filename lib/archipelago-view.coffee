@@ -5,7 +5,10 @@ Pane                             = require('./pane')
 
 module.exports =
 class ArchipelagoView
+  hidden: false
+
   constructor: (serializedState) ->
+    @exited = serializedState.exited
     @subscriptions = new CompositeDisposable()
     @_emitter = new Emitter()
 
@@ -21,8 +24,12 @@ class ArchipelagoView
     @bindWindowBackgroundListener()
 
   destroy: ->
+    return if @hidden
+
     @_pane.kill()
     @getElement().remove()
+    @exited.call()
+    @subscriptions.dispose
 
   getElement: ->
     return @_element if @_element?
@@ -75,3 +82,6 @@ class ArchipelagoView
   closeTab: ->
     tab = atom.workspace.paneForItem(this)
     if tab then tab.destroyItem(this)
+
+  toggle: ->
+    @hidden = !@hidden

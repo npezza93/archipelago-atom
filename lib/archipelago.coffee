@@ -3,15 +3,16 @@ config                  = require('./config.json')
 { CompositeDisposable } = require('atom')
 
 module.exports =
-  views: []
+  view: null
   subscriptions: null
   config: config
+  opened: false
 
   activate: (state) ->
     @subscriptions = new CompositeDisposable()
-
+    @view = new ArchipelagoView(exited: @exited.bind(this))
     @subscriptions.add atom.commands.add 'atom-workspace',
-      'archipelago:spawn': => @spawn()
+      'archipelago:toggle': => @toggle()
 
     @subscriptions.add atom.commands.add '.archipelago',
       'archipelago:split-horizontally': => @split('horizontal')
@@ -22,12 +23,11 @@ module.exports =
   deactivate: ->
     @subscriptions.dispose()
 
-  spawn: ->
-    view = new ArchipelagoView()
-    @views.push(view)
-    atom.workspace.open(
-      view, location: atom.config.get('archipelago.dockLocation')
-    )
+  toggle: ->
+    return @open() unless @opened
+
+    @view.toggle()
+    atom.workspace.toggle(@view)
 
   split: (orientation) ->
     atom.workspace.getActivePaneItem().split(orientation)
@@ -37,3 +37,13 @@ module.exports =
 
   handlePaste: ->
     atom.workspace.getActivePaneItem().paste()
+
+  open: ->
+    atom.workspace.open(
+      @view, location: atom.config.get('archipelago.dockLocation')
+    )
+    @opened = true
+
+  exited: ->
+    @view = new ArchipelagoView(exited: @exited.bind(this))
+    @opened = false

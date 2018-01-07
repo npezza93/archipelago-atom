@@ -4,7 +4,7 @@
   "version": "0.6.1",
   "description": "Archipelago for Atom is an extension of the Archipelago desktop app for Atom.",
   "activationCommands": {
-    "atom-workspace": "archipelago:spawn"
+    "atom-workspace": "archipelago:toggle"
   },
   "scripts": {
     "lint": "coffeelint lib/*.coffee"

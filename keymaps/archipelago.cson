@@ -1,5 +1,5 @@
 'atom-workspace':
-  'alt-space': 'archipelago:spawn'
+  'alt-space': 'archipelago:toggle'
 
 '.platform-darwin .archipelago':
   'cmd-s': 'archipelago:split-horizontally'
