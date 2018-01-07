@@ -15,8 +15,8 @@
 </p>
 
 ## Usage
-Navigate to the packages menu -> Archipelago -> Open Terminal or the corresponding
-keybinding. Once a terminal has been opened you can split the focused terminal in half, vertically or horizontally. To split on macOS you can press cmd-s(horizontally) or cmd-shift-s(vertically) or ctrl-s(horizontally) or ctrl-shift-s(vertically) on Windows and Linux.
+Navigate to the packages menu -> Archipelago -> Toggle Terminal or the corresponding
+keybinding (alt-space). Once a terminal has been opened you can split the focused terminal in half, vertically or horizontally. To split on macOS you can press cmd-s(horizontally) or cmd-shift-s(vertically) or ctrl-s(horizontally) or ctrl-shift-s(vertically) on Windows and Linux.
 
 On Linux, you will need to have g++ or a C++ compiler installed.
 
