@@ -5,8 +5,8 @@
       'label': 'Archipelago'
       'submenu': [
         {
-          'label': 'Open Terminal'
-          'command': 'archipelago:open'
+          'label': 'Spawn Terminal'
+          'command': 'archipelago:spawn'
         }
       ]
     ]

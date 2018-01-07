@@ -1,7 +1,5 @@
-'.platform-linux atom-workspace, .platform-win32 atom-workspace':
-  'ctrl-alt-a': 'archipelago:open'
-'.platform-darwin atom-workspace':
-  'cmd-alt-a': 'archipelago:open'
+'atom-workspace':
+  'alt-space': 'archipelago:spawn'
 
 '.platform-darwin .archipelago':
   'cmd-s': 'archipelago:split-horizontally'

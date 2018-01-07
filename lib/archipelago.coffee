@@ -11,7 +11,7 @@ module.exports =
     @subscriptions = new CompositeDisposable()
 
     @subscriptions.add atom.commands.add 'atom-workspace',
-      'archipelago:open': => @open()
+      'archipelago:spawn': => @spawn()
 
     @subscriptions.add atom.commands.add '.archipelago',
       'archipelago:split-horizontally': => @split('horizontal')
@@ -22,7 +22,7 @@ module.exports =
   deactivate: ->
     @subscriptions.dispose()
 
-  open: ->
+  spawn: ->
     view = new ArchipelagoView()
     @views.push(view)
     atom.workspace.open(
