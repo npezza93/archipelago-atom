@@ -12,12 +12,7 @@ class Terminal extends React.Component
   componentDidMount: ->
     @props.session.xterm.open(@refs.container)
     @props.session.xterm.setOption('theme', @props.session.getTheme())
-    setTimeout(
-      () =>
-        @props.session.fit()
-        @props.session.xterm.focus()
-      300
-    )
+    @props.session.xterm.setOption('cursorBlink', @props.session.settings('cursorBlink'))
 
   bindDataListeners: ->
     @props.session.on 'did-focus', () =>

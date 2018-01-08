@@ -59,6 +59,9 @@ class Session
   on: (event, handler) ->
     @emitter.on(event, handler)
 
+  focus: ->
+    @xterm.focus()
+
   fit: ->
     @xterm.charMeasure.measure(@xterm.options)
 

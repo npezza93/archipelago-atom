@@ -37,6 +37,12 @@ class Pane extends React.Component
   closeTab: ->
     if @state.sessions.root == null then @props.closeTab()
 
+  focus: ->
+    if @currentSession()
+      @currentSession().focus()
+    else
+      @state.sessions.root.focus()
+
   fit: ->
     return unless @state?
 

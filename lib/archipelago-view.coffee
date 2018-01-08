@@ -33,6 +33,7 @@ class ArchipelagoView
       '--archipelago-background-color',
       atom.config.get('archipelago.windowBackground').toHexString()
     )
+    @element.addEventListener('focus', () => @focus.bind(this))
 
     @element
 
@@ -94,3 +95,6 @@ class ArchipelagoView
 
   toggle: ->
     @hidden = !@hidden
+
+  focus: ->
+    @getPane().focus()

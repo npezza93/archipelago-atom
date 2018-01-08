@@ -20,6 +20,10 @@ module.exports =
       'archipelago:copy': => @handleCopy()
       'archipelago:paste': => @handlePaste()
 
+    @subscriptions.add atom.workspace.onDidChangeActivePaneItem (paneItem) =>
+      if paneItem is @view
+        paneItem.focus()
+
   deactivate: ->
     @subscriptions.dispose()
 
