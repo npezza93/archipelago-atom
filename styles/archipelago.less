@@ -49,6 +49,13 @@
       width: ~"calc(100% - 15px)";
       height: ~"calc(100% - 15px)";
 
+      ::-webkit-scrollbar-track {
+        background: var(--archipelago-background-color);
+      }
+      ::-webkit-scrollbar-thumb {
+        border: 3px solid var(--archipelago-background-color);
+      }
+
       .xterm {
         font-family: courier-new, courier, monospace;
         font-feature-settings: "liga" 0;
@@ -138,15 +145,6 @@
       }
 
       // overrides
-      .xterm .xterm-viewport {
-        -webkit-transition: all .5s;
-        opacity: 0;
-      }
-      .xterm .xterm-viewport:hover, .xterm.scrolling .xterm-viewport {
-        opacity: 1;
-       -webkit-transition: all .5s;
-      }
-
       .terminal {
         width: 100%;
       }
