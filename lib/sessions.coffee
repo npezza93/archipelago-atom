@@ -51,6 +51,9 @@ class Sessions
   kill: ->
     if @root then @root.kill()
 
+  fit: ->
+    @root.fit()
+
   find: (group, sessionId) ->
     foundSession = null
     @_traverse(group, (session) ->

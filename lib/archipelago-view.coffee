@@ -12,6 +12,33 @@ class ArchipelagoView
     @subscriptions = new CompositeDisposable()
     @_emitter = new Emitter()
 
+    @getPane()
+    @bindWindowBackgroundListener()
+
+  destroy: ->
+    return if @hidden
+
+    @_pane.kill()
+    @getElement().remove()
+    @_resizeObserver.disconnect()
+    @exited.call()
+    @subscriptions.dispose()
+
+  getElement: ->
+    return @element if @element?
+
+    @element = document.createElement('div')
+    @element.classList.add('archipelago')
+    @element.style.setProperty(
+      '--archipelago-background-color',
+      atom.config.get('archipelago.windowBackground').toHexString()
+    )
+
+    @element
+
+  getPane: ->
+    return @_pane if @_pane?
+
     @_pane = ReactDOM.render(
       React.createElement(
         Pane
@@ -20,28 +47,10 @@ class ArchipelagoView
       )
       @getElement()
     )
+    @_resizeObserver = new ResizeObserver(@_pane.fit)
+    @_resizeObserver.observe(@getElement())
 
-    @bindWindowBackgroundListener()
-
-  destroy: ->
-    return if @hidden
-
-    @_pane.kill()
-    @getElement().remove()
-    @exited.call()
-    @subscriptions.dispose
-
-  getElement: ->
-    return @_element if @_element?
-
-    @_element = document.createElement('div')
-    @_element.classList.add('archipelago')
-    @_element.style.setProperty(
-      '--archipelago-background-color',
-      atom.config.get('archipelago.windowBackground').toHexString()
-    )
-
-    @_element
+    @_pane
 
   getIconName: ->
     'terminal'

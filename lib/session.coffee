@@ -6,6 +6,8 @@ Xterm               = require('xterm').Terminal
 Terminal            = require('./terminal')
 defaultKeybindings  = require('./default_keybindings')
 
+Xterm.applyAddon(require('xterm/lib/addons/fit/fit'))
+
 module.exports =
 class Session
   constructor: (group) ->
@@ -51,8 +53,6 @@ class Session
     true
 
   kill: ->
-    window.removeEventListener('resize', @fit.bind(this))
-
     @pty.kill()
     @xterm.destroy()
 
@@ -61,12 +61,9 @@ class Session
 
   fit: ->
     @xterm.charMeasure.measure(@xterm.options)
-    rows = Math.floor(@xterm.element.offsetHeight / @xterm.charMeasure.height)
-    cols = Math.floor(@xterm.element.offsetWidth / @xterm.charMeasure.width) - 2
 
-    try
-      @xterm.resize(cols, rows)
-      @pty.resize(cols, rows)
+    @xterm.fit()
+    @pty.resize(@xterm.cols, @xterm.rows)
 
   settings: (setting) ->
     if setting? && setting == 'theme'
@@ -118,7 +115,6 @@ class Session
 
   bindDataListeners: ->
     @xterm.attachCustomKeyEventHandler(@keybindingHandler)
-    window.addEventListener 'resize', @fit.bind(this)
 
     @xterm.on 'data', (data) =>
       try
