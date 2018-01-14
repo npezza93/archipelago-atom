@@ -3,12 +3,11 @@ SplitPane = require('react-split-pane')
 
 module.exports =
 class SessionGroup
+  isSession: false
+
   constructor: (group, orientation) ->
     @group       = group
     @orientation = orientation
-
-  isSession: ->
-    false
 
   render: (props) ->
     React.createElement(

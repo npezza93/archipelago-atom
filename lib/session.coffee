@@ -1,20 +1,22 @@
-Pty                 = require('node-pty')
-defaultShell        = require('default-shell')
-React               = require('react')
+{ spawn }           = require 'node-pty'
+defaultShell        = require 'default-shell'
+React               = require 'react'
+Terminal            = require './terminal'
 Xterm               = require('xterm').Terminal
 { Emitter }         = require('atom')
-Terminal            = require('./terminal')
 defaultKeybindings  = require('./default_keybindings')
 
 Xterm.applyAddon(require('xterm/lib/addons/fit/fit'))
 
 module.exports =
 class Session
+  isSession: true
+
   constructor: (group) ->
     @id = Math.random()
     @group = group
-    @emitter = new Emitter()
-    @pty = Pty.spawn(
+    @emitter = new Emitter
+    @pty = spawn(
       @setting('shell') || defaultShell
       @setting('shellArgs').split(',')
       name: 'xterm-256color'
@@ -48,9 +50,6 @@ class Session
       setCurrentSession: props.setCurrentSession
       closeTab: props.closeTab
     )
-
-  isSession: ->
-    true
 
   kill: ->
     @pty.kill()
@@ -131,7 +130,7 @@ class Session
       @emitter.emit('did-focus')
 
     @xterm.on 'title', (title) =>
-      @emitter.emit('titleChanged')
+      @emitter.emit('did-change-title')
 
     @xterm.on 'selection', () =>
       if @setting('copyOnSelect')
@@ -139,6 +138,7 @@ class Session
 
     @pty.on 'data', (data) =>
       @xterm.write(data)
+      @emitter.emit('data')
 
     @pty.on 'exit', () =>
       @emitter.emit('did-exit')
