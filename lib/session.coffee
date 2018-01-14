@@ -123,6 +123,11 @@ class Session
 
     @xterm.on 'focus', () =>
       @fit()
+      setTimeout(() =>
+        @xterm.setOption('cursorBlink', !@setting('cursorBlink'))
+        @xterm.setOption('cursorBlink', @setting('cursorBlink'))
+        100
+      )
       @emitter.emit('did-focus')
 
     @xterm.on 'title', (title) =>
