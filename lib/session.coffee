@@ -15,26 +15,26 @@ class Session
     @group = group
     @emitter = new Emitter()
     @pty = Pty.spawn(
-      @settings('shell') || defaultShell
-      @settings('shellArgs').split(',')
+      @setting('shell') || defaultShell
+      @setting('shellArgs').split(',')
       name: 'xterm-256color'
       cwd: @projectPath() || process.env.HOME
       env: {}
     )
 
     @xterm = new Xterm(
-      fontFamily: @settings('fontFamily')
-      fontSize: @settings('fontSize')
-      lineHeight: @settings('lineHeight')
-      letterSpacing: @settings('letterSpacing')
-      cursorStyle: @settings('cursorStyle')
-      cursorBlink: @settings('cursorBlink')
-      bellSound: @settings('bellSound')
-      bellStyle: @settings('bellStyle')
-      scrollback: @settings('scrollback')
-      tabStopWidth: @settings('tabStopWidth')
-      enableBold: @settings('enableBold')
-      theme: @settings('theme')
+      fontFamily: @setting('fontFamily')
+      fontSize: @setting('fontSize')
+      lineHeight: @setting('lineHeight')
+      letterSpacing: @setting('letterSpacing')
+      cursorStyle: @setting('cursorStyle')
+      cursorBlink: @setting('cursorBlink')
+      bellSound: @setting('bellSound')
+      bellStyle: @setting('bellStyle')
+      scrollback: @setting('scrollback')
+      tabStopWidth: @setting('tabStopWidth')
+      enableBold: @setting('enableBold')
+      theme: @setting('theme')
     )
     @bindDataListeners()
 
@@ -68,13 +68,11 @@ class Session
     @xterm.fit()
     @pty.resize(@xterm.cols, @xterm.rows)
 
-  settings: (setting) ->
-    if setting? && setting == 'theme'
+  setting: (setting) ->
+    if setting == 'theme'
       @getTheme()
-    else if setting?
-      atom.config.get("archipelago.#{setting}")
     else
-      atom.config.get('archipelago')
+      atom.config.get("archipelago.#{setting}")
 
   keybindingHandler: (e) =>
     caught = false
@@ -131,7 +129,7 @@ class Session
       @emitter.emit('titleChanged')
 
     @xterm.on 'selection', () =>
-      if @settings('copyOnSelect')
+      if @setting('copyOnSelect')
         @copy()
 
     @pty.on 'data', (data) =>
