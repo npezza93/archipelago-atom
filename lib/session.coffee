@@ -149,5 +149,5 @@ class Session
        atom.config.onDidChange "archipelago.#{field}", (newValue) =>
          @xterm.setOption(field, newValue)
 
-    atom.config.onDidChange 'archipelago.theme', (newValue) =>
-      @xterm.setOption(field, @getTheme(newValue))
+    atom.config.onDidChange 'archipelago.theme', ({newValue, oldValue}) =>
+      @xterm.setOption('theme', @getTheme(newValue))

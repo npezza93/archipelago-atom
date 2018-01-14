@@ -76,10 +76,6 @@
       "sound"
     ]
   },
-  "windowBackground": {
-    "type": "color",
-    "default": "#282c34"
-  },
   "theme": {
     "type": "object",
     "properties": {

@@ -13,7 +13,7 @@ class ArchipelagoView
     @_emitter = new Emitter()
 
     @getPane()
-    @bindWindowBackgroundListener()
+    @bindBackgroundListener()
 
   destroy: ->
     return if @hidden
@@ -31,7 +31,7 @@ class ArchipelagoView
     @element.classList.add('archipelago')
     @element.style.setProperty(
       '--archipelago-background-color',
-      atom.config.get('archipelago.windowBackground').toHexString()
+      atom.config.get('archipelago.theme.background').toHexString()
     )
     @element.addEventListener('focus', () => @focus.bind(this))
 
@@ -79,14 +79,14 @@ class ArchipelagoView
 
     @_pane.currentSession().paste()
 
-  onDidChangeWindowBackground: (color) ->
+  onDidChangeBackground: ({oldValue, newValue}) ->
     @getElement().style.setProperty(
-      '--archipelago-background-color', color.toHexString()
+      '--archipelago-background-color', newValue.toHexString()
     )
 
-  bindWindowBackgroundListener: ->
+  bindBackgroundListener: ->
     atom.config.onDidChange(
-      'archipelago.windowBackground', @onDidChangeWindowBackground.bind(this)
+      'archipelago.theme.background', @onDidChangeBackground.bind(this)
     )
 
   closeTab: ->
