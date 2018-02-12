@@ -21,7 +21,7 @@ class Session
       @setting('shellArgs').split(',')
       name: 'xterm-256color'
       cwd: @projectPath() || process.env.HOME
-      env: {}
+      env: @santitizedEnv()
     )
 
     @xterm = new Xterm(
@@ -112,6 +112,13 @@ class Session
         theme[name] = color.toHexString()
 
     theme
+
+  santitizedEnv: ->
+    santitizedEnv = Object.assign({}, process.env)
+    delete santitizedEnv.NODE_ENV
+    delete santitizedEnv.NODE_PATH
+
+    santitizedEnv
 
   bindDataListeners: ->
     @xterm.attachCustomKeyEventHandler(@keybindingHandler)
