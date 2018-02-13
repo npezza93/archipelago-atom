@@ -27,6 +27,8 @@ class Session
     @xterm = new Xterm(
       fontFamily: @setting('fontFamily')
       fontSize: @setting('fontSize')
+      fontWeight: @setting('fontWeight')
+      fontWeightBold: @setting('fontWeightBold')
       lineHeight: @setting('lineHeight')
       letterSpacing: @setting('letterSpacing')
       cursorStyle: @setting('cursorStyle')
@@ -35,8 +37,9 @@ class Session
       bellStyle: @setting('bellStyle')
       scrollback: @setting('scrollback')
       tabStopWidth: @setting('tabStopWidth')
-      enableBold: @setting('enableBold')
       theme: @setting('theme')
+      rightClickSelectsWord: @setting('rightClickSelectsWord')
+      macOptionIsMeta: @setting('macOptionIsMeta')
     )
     @bindDataListeners()
 
@@ -150,9 +153,10 @@ class Session
     @pty.on 'exit', () =>
       @emitter.emit('did-exit')
 
-    ['fontFamily', 'cursorStyle', 'cursorBlink', 'scrollback',
-     'enableBold', 'tabStopWidth', 'fontSize', 'letterSpacing',
-     'lineHeight', 'bellSound', 'bellStyle'].forEach (field) =>
+    ['fontFamily', 'fontWeight', 'fontWeightBold', 'cursorStyle', 'cursorBlink',
+     'scrollback', 'tabStopWidth', 'fontSize', 'letterSpacing', 'lineHeight',
+     'bellSound', 'bellStyle', 'rightClickSelectsWord',
+     'macOptionIsMeta'].forEach (field) =>
        atom.config.onDidChange "archipelago.#{field}", (newValue) =>
          @xterm.setOption(field, newValue)
 

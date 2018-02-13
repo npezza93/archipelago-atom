@@ -18,6 +18,14 @@
     "type": "boolean",
     "default": true
   },
+  "rightClickSelectsWord": {
+    "type": "boolean",
+    "default": true
+  },
+  "macOptionIsMeta": {
+    "type": "boolean",
+    "default": true
+  },
   "letterSpacing": {
     "type": "number",
     "default": 0,
@@ -33,10 +41,6 @@
     "default": 8,
     "minimum": 0
   },
-  "enableBold": {
-    "type": "boolean",
-    "default": true
-  },
   "fontFamily": {
     "type": "string",
     "default": "courier-new, courier, monospace"
@@ -45,6 +49,44 @@
     "type": "integer",
     "default": 15,
     "minimum": 1
+  },
+  "fontWeight": {
+    "type": "string",
+    "default": "normal",
+    "enum": [
+      "normal",
+      "bold",
+      "bolder",
+      "lighter",
+      "100",
+      "200",
+      "300",
+      "400",
+      "500",
+      "600",
+      "700",
+      "800",
+      "900"
+    ]
+  },
+  "fontWeightBold": {
+    "type": "string",
+    "default": "bold",
+    "enum": [
+      "normal",
+      "bold",
+      "bolder",
+      "lighter",
+      "100",
+      "200",
+      "300",
+      "400",
+      "500",
+      "600",
+      "700",
+      "800",
+      "900"
+    ]
   },
   "cursorBlink": {
     "type": "boolean",
