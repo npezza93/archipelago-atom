@@ -27,9 +27,8 @@
     "default": true
   },
   "letterSpacing": {
-    "type": "number",
-    "default": 0,
-    "minimum": 0
+    "type": "string",
+    "default": "0"
   },
   "scrollback": {
     "type": "integer",
