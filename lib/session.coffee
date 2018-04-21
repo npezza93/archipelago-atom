@@ -118,6 +118,9 @@ class Session
 
   santitizedEnv: ->
     santitizedEnv = Object.assign({}, process.env)
+    santitizedEnv.LANG = 'en-US.UTF-8'
+    santitizedEnv.TERM = 'xterm-256color'
+    santitizedEnv.COLORTERM = 'truecolor'
     delete santitizedEnv.NODE_ENV
     delete santitizedEnv.NODE_PATH
 
