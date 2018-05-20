@@ -40,6 +40,8 @@ class Session
       theme: @setting('theme')
       rightClickSelectsWord: @setting('rightClickSelectsWord')
       macOptionIsMeta: @setting('macOptionIsMeta')
+      experimentalCharAtlas: @setting('experimentalCharAtlas')
+      useFlowControl: @setting('useFlowControl')
     )
     @bindDataListeners()
 
@@ -55,8 +57,9 @@ class Session
     )
 
   kill: ->
+    @emitter.dispose()
     @pty.kill()
-    @xterm.destroy()
+    @xterm.dispose()
 
   on: (event, handler) ->
     @emitter.on(event, handler)

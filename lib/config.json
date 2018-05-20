@@ -18,6 +18,10 @@
     "type": "boolean",
     "default": true
   },
+  "useFlowControl": {
+    "type": "boolean",
+    "default": false
+  },
   "rightClickSelectsWord": {
     "type": "boolean",
     "default": true
@@ -48,6 +52,15 @@
     "type": "integer",
     "default": 15,
     "minimum": 1
+  },
+  "experimentalCharAtlas": {
+    "type": "string",
+    "default": "static",
+    "enum": [
+      "none",
+      "static",
+      "dynamic"
+    ]
   },
   "fontWeight": {
     "type": "string",
