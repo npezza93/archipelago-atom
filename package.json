@@ -1,7 +1,7 @@
 {
   "name": "archipelago",
   "main": "./lib/archipelago",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "description": "Archipelago for Atom is an extension of the Archipelago desktop app for Atom.",
   "activationCommands": {
     "atom-workspace": "archipelago:toggle"
