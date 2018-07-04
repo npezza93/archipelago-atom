@@ -82,8 +82,12 @@ class Session
   keybindingHandler: (e) =>
     caught = false
 
-    document.querySelector('.project-find .close-button .clickable').click()
-    document.querySelector('.find-and-replace .close-button .clickable').click()
+    projectFindEl = '.project-find .close-button .clickable'
+    findReplaceEl = '.find-and-replace .close-button .clickable'
+    finderEls = document.querySelectorAll("#{projectFindEl}, #{findReplaceEl}")
+
+    finderEls.forEach (el) ->
+      el.click()
 
     @keybindings().forEach (keybinding) =>
       if atom.keymaps.keystrokeForKeyboardEvent(e) == keybinding.keystroke
