@@ -16,11 +16,11 @@
   },
   "dependencies": {
     "default-shell": "^1.0.1",
-    "node-pty": "^0.7.8",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-split-pane": "^0.1.84",
-    "xterm": "^3.8.0"
+    "node-pty": "^0.8.0",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-split-pane": "^0.1.85",
+    "xterm": "^3.9.0"
   },
   "keywords": [
     "archipelago",
