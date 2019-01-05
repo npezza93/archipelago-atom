@@ -68,6 +68,8 @@ class Session
     @xterm.focus()
 
   fit: ->
+    if !@xterm._core.charMeasure.height
+      @xterm._core.charMeasure.measure(@xterm._core.options)
     @xterm.fit()
     @pty.resize(@xterm.cols, @xterm.rows)
 
@@ -105,6 +107,29 @@ class Session
 
   paste: ->
     @pty.write(atom.clipboard.read())
+
+  attach: (container) ->
+    console.log container
+    if @_container == container
+      return
+
+    if !@_wrapperElement
+      @_container = container
+      @_wrapperElement = document.createElement('div')
+      @_wrapperElement.classList = 'wrapper'
+      @_xtermElement = document.createElement('div')
+      @_xtermElement.classList = 'wrapper'
+      @_wrapperElement.appendChild(@_xtermElement)
+      @_container.appendChild(@_wrapperElement)
+      console.log 'opening'
+      @xterm.open(@_xtermElement)
+      @xterm.focus()
+      return
+
+    @_container.removeChild(@_wrapperElement)
+    @_container = container
+    @_container.appendChild(@_wrapperElement)
+    @xterm.focus()
 
   keybindings: ->
     if atom.config.get('archipelago.keybindings')

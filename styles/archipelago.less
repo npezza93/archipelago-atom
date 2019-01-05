@@ -41,11 +41,14 @@
       cursor: col-resize;
     }
 
-    archipelago-terminal {
-      height: 100%;
+    archipelago-terminal, archipelago-terminal .wrapper {
       display: flex;
       flex: 1;
+      height: 100%;
+      overflow-x: hidden;
+    }
 
+    archipelago-terminal {
       ::-webkit-scrollbar-track {
         background: var(--archipelago-background-color);
       }
@@ -157,7 +160,13 @@
         cursor: pointer;
       }
 
-      .xterm .xterm-accessibility, .xterm .xterm-message {
+      .xterm.column-select.focus {
+        /* Column selection mode */
+        cursor: crosshair;
+      }
+
+      .xterm .xterm-accessibility,
+      .xterm .xterm-message {
         position: absolute;
         left: 0;
         top: 0;

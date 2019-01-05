@@ -10,8 +10,7 @@ class Terminal extends React.Component
     React.createElement('archipelago-terminal', ref: 'container')
 
   componentDidMount: ->
-    @props.session.xterm.open(@refs.container)
-    @props.session.xterm.setOption('theme', @props.session.getTheme())
+    @props.session.attach(@refs.container)
 
   bindDataListeners: ->
     @props.session.on 'did-focus', () =>
