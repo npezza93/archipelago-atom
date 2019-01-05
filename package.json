@@ -20,7 +20,7 @@
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-split-pane": "^0.1.85",
-    "xterm": "^3.9.0"
+    "xterm": "^3.10.0"
   },
   "keywords": [
     "archipelago",
